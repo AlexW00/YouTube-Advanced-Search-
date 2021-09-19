@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>⌛️ GT-Time Machine</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
@@ -30,13 +30,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-theme-l1">YouTube Search</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Advanced Search</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Top Favs</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">About</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Login</a>
+    <a href="#" class="w3-bar-item w3-button w3-theme-l1">AdvSearch</a>
   </div>
 </div>
 
@@ -80,10 +74,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
       <option>date</option>      
     </select>
   </form> 
-
-  <a class="w3-bar-item w3-button w3-hover-grey" href="#">Filter 2</a>
-  <a class="w3-bar-item w3-button w3-hover-grey" href="#">Filter 3</a>
-  <a class="w3-bar-item w3-button w3-hover-grey" href="#">Filter 4</a>
 </nav>
 
 <!-- Overlay effect when opening sidebar on small screens -->
@@ -94,7 +84,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 
   <div class="w3-row w3-padding-64">
     <div class="w3-rest w3-container" align="center">
-      <h1 class="w3-text-teal">YouTube Search</h1>
+      <h1 class="w3-text-teal" id="time_machine_id">⌛️ GT-Time machine</h1>
 
       <div class="container" id="mainid">
         
@@ -107,6 +97,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
           <input type = "hidden" id = "hightime_id" name ="hightime" >
           <input type = "hidden" id = "type_id" name ="type" >
           <input type = "hidden" id = "order_id" name ="order" >
+        
           <input type="submit"  value="Search">
         </form>
 
@@ -126,6 +117,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
           }
           if(window.localStorage.getItem("high") !== undefined){
             $("#hdate_id").val(window.localStorage.getItem("high"));
+            if(window.localStorage.getItem("lowtime") !== undefined){
+              const title = "⌛️ Time machine: ",
+              year1 = window.localStorage.getItem("low").split("-")[0],
+              year2 = window.localStorage.getItem("high").split("-")[0];
+
+              $("#time_machine_id").text(title + year1);
+          }
+            
           } 
           if(window.localStorage.getItem("lowtime") !== undefined){
             $("#ltime_id").val(window.localStorage.getItem("lowtime"));
@@ -203,16 +202,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
     </div>
   </div>
 
-  <footer id="myFooter">
-    <div class="w3-container w3-theme-l2 w3-padding-32">
-      <h4>Footer</h4>
-    </div>
-
-    <div class="w3-container w3-theme-l1">
-      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-    </div>
-  </footer>
-
+  
 <!-- END MAIN -->
 </div>
 
