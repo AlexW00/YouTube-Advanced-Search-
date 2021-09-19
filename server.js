@@ -215,7 +215,9 @@ let send_request = function (req, res, arr_holder) {
                 result.items[i].id.channelId;
             }
             let video_class = new Video(
-              result.items[i].snippet.title,
+              result.items[i].snippet.channelTitle +
+                ": " +
+                result.items[i].snippet.title,
               result.items[i].snippet.thumbnails.medium.url,
               video_url,
               result.items[i].id.videoId
