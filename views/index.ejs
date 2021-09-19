@@ -71,6 +71,16 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
     </select>
   </form> 
 
+
+  <form class="w3-bar-item w3-button w3-hover-grey">
+    Order<br>
+    <select name="oorder" id="oorder_id">
+      <option>relevance</option>
+      <option>viewCount</option>
+      <option>date</option>      
+    </select>
+  </form> 
+
   <a class="w3-bar-item w3-button w3-hover-grey" href="#">Filter 2</a>
   <a class="w3-bar-item w3-button w3-hover-grey" href="#">Filter 3</a>
   <a class="w3-bar-item w3-button w3-hover-grey" href="#">Filter 4</a>
@@ -96,6 +106,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
           <input type = "hidden" id = "hightime_id" name ="hightime" >
           <input type = "hidden" id = "hightime_id" name ="hightime" >
           <input type = "hidden" id = "type_id" name ="type" >
+          <input type = "hidden" id = "order_id" name ="order" >
           <input type="submit"  value="Search">
         </form>
 
@@ -124,7 +135,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
           }        
           if(window.localStorage.getItem("type") !== undefined){
             $("#ttype_id").val(window.localStorage.getItem("type"));
-          }                        
+          }            
+          if(window.localStorage.getItem("order") !== undefined){
+            $("#oorder_id").val(window.localStorage.getItem("order"));
+          }                       
         </script>
           <% if(locals.video_array !== undefined) {%> <!-- Makes sure there is a search term -->                     
               <% var page_loop = 9; %>
@@ -180,6 +194,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
         <input type = "hidden" name ="lowtime_page" value=">>">
         <input type = "hidden" name ="hightime_page" value=">>">   
         <input type = "hidden" name ="type_page" value=">>">
+        <input type = "hidden" name ="order_page" value=">>">
+    
       </form>
       <button type="submit" class="w3-button w3-black" onclick="goBack()" value=">"><<</button>
       <button type="submit" class="w3-button w3-black" form="formid" value=">>">>></button>
@@ -238,6 +254,8 @@ function keep_search(){ //on new search submit
   window.localStorage.setItem("hightime",$('#hightime_id').val());
   $("#type_id").val($("#ttype_id").val());
   window.localStorage.setItem("type",$('#type_id').val());
+  $("#order_id").val($("#oorder_id").val());
+  window.localStorage.setItem("order",$('#order_id').val());
 }
 
 function save_search(){ //on next page button push
@@ -246,6 +264,7 @@ function save_search(){ //on next page button push
   $("#hdate_id").val(window.localStorage.getItem("high"));
   $("#ltime_id").val(window.localStorage.getItem("lowtime"));
   $("#htime_id").val(window.localStorage.getItem("hightime"));
+  $("#order_id").val(window.localStorage.getItem("order"));
 }
 
 function goBack(){

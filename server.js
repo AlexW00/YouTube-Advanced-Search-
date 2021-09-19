@@ -25,7 +25,7 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
   let search_term = "";
-  let page_token,
+  let page_token = "",
     marker = 0,
     counter = 0; //Global vars in this scope. Might need to change
   let length_done = [0];
@@ -82,6 +82,7 @@ let set_filters = function (req) {
     let low_time = "0",
       high_time = "999999";
     let type_v = "";
+    let order_v = "";
 
     /*Date filter information*/
     if (localStorage.getItem("low_date") === null) {
@@ -149,6 +150,21 @@ let set_filters = function (req) {
       localStorage.setItem("type", type_v);
     }
 
+    /*Order information*/
+    if (localStorage.getItem("order") === null) {
+      //no local storage set yet
+      localStorage.setItem("order", order_v);
+    }
+    if (req.body.order === "") {
+      //low date filter empty
+      localStorage.setItem("order", order_v); //set default
+    }
+    if (req.body.order !== "" && req.body.order !== undefined) {
+      order_v = req.body.order;
+      //order_v = order_v.toISOString();
+      localStorage.setItem("order", order_v);
+    }
+
     resolve();
   });
 };
@@ -178,7 +194,11 @@ let send_request = function (req, res, arr_holder) {
       publishedAfter: localStorage.getItem("low_date"),
       pageToken: localStorage.getItem("page_token"),
       type: localStorage.getItem("type"),
-      order: "viewCount",
+      order:
+        localStorage.getItem("order") == "" ||
+        localStorage.getItem("order") == undefined
+          ? "relevance"
+          : localStorage.getItem("order"),
     };
     console.log("Type: " + localStorage.getItem("type"));
     tube.search(
@@ -224,11 +244,11 @@ let send_request = function (req, res, arr_holder) {
             );
             arr_holder.push(video_class); //array of videos
           }
-          page_token = result.nextPageToken;
+          page_token = result.nextPageToken ?? "";
           console.log("RESULT Playlist: " + page_token);
         }
-        localStorage.setItem("page_token", page_token);
 
+        localStorage.setItem("page_token", page_token ?? "");
         resolve(page_num);
       }
     );
